@@ -38,4 +38,9 @@ class Dog
   def self.create(attr_hash)
     Dog.new(attr_hash).tap {|dog| dog.save}
   end
+
+  def self.find_by_id(id)
+    dog = DB[:conn].execute("SELECT * FROM dogs WHERE id = ?", id)
+    Dog.new(dog)
+  end
 end
